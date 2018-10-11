@@ -52,7 +52,6 @@ export class PbxformComponent implements OnInit {
     this.selected_main_number = event.target.value;
     this.formContent.main_number = event.target.value;
 
-    console.log("selected main number: " + this.selected_main_number);
     this._pbxService.getNumbers().subscribe(
       sub_numbers => this.sub_numbers = sub_numbers
     );
@@ -64,15 +63,11 @@ export class PbxformComponent implements OnInit {
   }
 
   addSelectedSubNumber(options) {
-    console.log("selected numbers");
 
     this.selected_sub_numbers = Array.apply(null,options)  // convert to real Array
           .filter(option => option.selected)
           .map(option => option.value);
 
-    // this.selected_sub_numbers.push(event.target.value);
-    // this.formContent.sub_numbers.push(event.target.value);
-    console.log(this.selected_sub_numbers);
   }
 
   onSubmit () {

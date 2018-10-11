@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormContent} from "../models/FormContent";
 import {PbxService} from "../services/pbx.service";
-import {Price} from "../models/Price";
 
 @Component({
   selector: 'app-complete-pbxform',

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {FormContent} from "../models/FormContent";
-import {Price} from "../models/Price";
 import {Numbers} from "../models/Numbers";
 
 const httpOptions = {
@@ -44,8 +43,6 @@ export class PbxService {
   }
 
   setSavedFormContent(formContent: FormContent) {
-    console.log("saved form content: ");
-    console.log(formContent);
     this.formContent = formContent;
   }
 }
