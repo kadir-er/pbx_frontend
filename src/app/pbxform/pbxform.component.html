@@ -1,0 +1,144 @@
+<div class="container" style="padding-bottom: 30px; padding-top: 30px; padding-right: 10%; padding-left: 10%">
+  <h2>PBX Form</h2>
+  <form [formGroup]="userForm" #usrForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Firma Adı</label>
+      <input type="text" [(ngModel)]="this.formContent.firm_name" class="form-control" formControlName="firmname">
+      <div *ngIf="userForm.controls['firmname'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Firma adresi</label>
+      <input type="text" [(ngModel)]="this.formContent.firm_address" class="form-control" formControlName="firmaddress">
+      <div *ngIf="userForm.controls['firmaddress'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Firma sektörü</label>
+      <input type="text" [(ngModel)]="this.formContent.firm_sector" class="form-control" formControlName="firmsector">
+      <div *ngIf="userForm.controls['firmsector'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Vergi Dairesi</label>
+      <input type="text" [(ngModel)]="this.formContent.tax_office" class="form-control" formControlName="taxoffice">
+
+      <div *ngIf="userForm.controls['taxoffice'].hasError('minlength')" class = "alert alert-danger">
+        En az 3 karakter giriniz
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Vergi Numarası</label>
+      <input type="number" [(ngModel)]="this.formContent.tax_id" class="form-control" formControlName="taxid">
+
+      <div *ngIf="userForm.controls['taxid'].hasError('maxLength')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+      <div *ngIf="userForm.controls['taxid'].hasError('minLength')" class = "alert alert-danger">
+        Telefon numarası 11 hane olmalıdır
+      </div>
+      <div *ngIf="userForm.controls['taxid'].hasError('required')" class = "alert alert-danger">
+        Telefon numarası 11 hane olmalıdır
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Temsilci ismi</label>
+      <input type="text" [(ngModel)]="this.formContent.representor_name" class="form-control" formControlName="representorname">
+
+      <div *ngIf="userForm.controls['representorname'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Temsilci soyismi</label>
+      <input type="text" [(ngModel)]="this.formContent.representor_surname" class="form-control" formControlName="representorsurname">
+
+      <div *ngIf="userForm.controls['representorsurname'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Temsilci email</label>
+      <input type="text" [(ngModel)]="this.formContent.representor_email" class="form-control" formControlName="representoremail">
+
+      <div *ngIf="userForm.controls['representoremail'].hasError('pattern')" class = "alert alert-danger">
+        Lütfen Geçerli bir e-mail giriniz
+      </div>
+      <div *ngIf="userForm.controls['representoremail'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label>Temsilci telefon numarası</label>
+      <input type="number" [(ngModel)]="this.formContent.representor_tel" class="form-control" formControlName="representortel">
+
+      <div *ngIf="userForm.controls['representortel'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+      <div *ngIf="userForm.controls['representortel'].hasError('minLength')" class = "alert alert-danger">
+        Telefon numarası 11 hane olmalıdır
+      </div>
+      <div *ngIf="userForm.controls['representortel'].hasError('maxLength')" class = "alert alert-danger">
+        Telefon numarası 11 hane olmalıdır
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block" multiple>Ana numara
+        <select class="form-control" (change)="mainNumberSelected($event)" formControlName="mainnumber">
+          <option *ngFor="let Number of this.main_numbers" value="{{Number.number}}">
+            {{Number.number}}
+          </option>
+        </select>
+      </label>
+      <div *ngIf="userForm.controls['mainnumber'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block">Alt numara
+        <select class="form-control" multiple  (change)="addSelectedSubNumber($event.target.options)" formControlName="subnumbers">
+          <option *ngFor="let Number of this.sub_numbers" [value]="Number.id">
+            {{Number.number}}
+          </option>
+        </select>
+      </label>
+      <div *ngIf="userForm.controls['subnumbers'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block">Taahhüt
+        <select class="form-control" formControlName="contracttime" [(ngModel)]="this.formContent.contract_time">
+          <option value="0">Taahhüt yok</option>
+          <option value="1">1 yıl</option>
+          <option value="2">2 yıl</option>
+          <option value="3">3 yıl</option>
+        </select>
+      </label>
+      <div *ngIf="userForm.controls['contracttime'].hasError('required')" class = "alert alert-danger">
+        Bu alan zorunludur
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Submit</button>
+  </form>
+</div>
